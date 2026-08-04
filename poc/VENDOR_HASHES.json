@@ -1,0 +1,58 @@
+{
+  "commit": "b5a677429481e0c93faa9841a9d9ce02ced95e35",
+  "commit_short": "b5a67742",
+  "commit_date": "2026-07-30T16:10:28+05:30",
+  "commit_subject": "Remove legacy platform code (#1034)",
+  "repo": "potpie-ai/potpie",
+  "note": "Every path below is byte-for-byte identical to `gh api repos/potpie-ai/potpie/contents/<upstream_path>?ref=<commit>`. Run verify_vendor_hashes.py to recheck.",
+  "files": {
+    "vendor/potpie_context_core/ports/claim_query.py": {
+      "upstream_path": "potpie/context-core/src/potpie_context_core/ports/claim_query.py",
+      "sha256": "3334d57a18e0375c3f7f82f321e122778c2cb50dafcc1bc37777c886a681a03c"
+    },
+    "vendor/potpie_context_core/agent_envelope.py": {
+      "upstream_path": "potpie/context-core/src/potpie_context_core/agent_envelope.py",
+      "sha256": "2239ddf41ac3daf240f13e1fc4ce7c06fe35aa9c00a1b0c5e06814c5d21d1568"
+    },
+    "vendor/potpie_context_core/graph_contract.py": {
+      "upstream_path": "potpie/context-core/src/potpie_context_core/graph_contract.py",
+      "sha256": "912028308e4673bbc7158130b87f9b25f65f7c3abbfac10ff139b26e43745df0"
+    },
+    "vendor/potpie_context_core/semantic_mutations.py": {
+      "upstream_path": "potpie/context-core/src/potpie_context_core/semantic_mutations.py",
+      "sha256": "33de9cf0e4247da5cb8505e094a1381f0654ce5eebb5b0d2f847d9702e0e5cb3"
+    },
+    "vendor/potpie_context_core/ports/agent_context.py": {
+      "upstream_path": "potpie/context-core/src/potpie_context_core/ports/agent_context.py",
+      "sha256": "3553112c7db01061efe8c7d952cbf32a6024054eb30d99a5d23e5619b94405b2"
+    },
+    "vendor/potpie_context_core/ports/graph_service.py": {
+      "upstream_path": "potpie/context-core/src/potpie_context_core/ports/graph_service.py",
+      "sha256": "f8f4166d536c6f454d625b0a562742046829d30e8a40ceb80ef3172d6ca7a9ac"
+    },
+    "vendor/potpie_nudge.py": {
+      "upstream_path": "potpie/cli/templates/claude_plugin/hooks/potpie_nudge.py",
+      "sha256": "2187fafb4855c4e681c68a6f7fed34a06a0adbe979152eabf8f3c6620ee2df61"
+    },
+    "vendor/read_presenter.py": {
+      "upstream_path": "potpie/cli/read_presenter.py",
+      "sha256": "8713b3cb4bd130770d4a2fa5aeb1f06fcf0c34a5402c685ce8e3d72f840a12cc"
+    }
+  },
+  "reproduced_functions": {
+    "note": "These two functions are reproduced verbatim inside injection_chain_repro.py rather than vendored as separate files, because importing their parent module pulls in unrelated package machinery (see script docstring). Their SHA-256 is over the exact function body text as it appears at the commit above, whitespace-normalized to the source file's own indentation.",
+    "claim_payload": {
+      "upstream_path": "potpie/context-engine/src/potpie_context_engine/application/readers/_common.py",
+      "lines": "152-181"
+    },
+    "_format_inject_context": {
+      "upstream_path": "potpie/context-engine/src/potpie_context_engine/application/services/nudge_service.py",
+      "lines": "160-196"
+    },
+    "envelope_builder_passthrough": {
+      "upstream_path": "potpie/context-engine/src/potpie_context_engine/application/services/envelope_builder.py",
+      "lines": "89",
+      "note": "cited only, not reproduced -- payload=dict(ranked.candidate.payload) is a one-line unconditional dict copy"
+    }
+  }
+}

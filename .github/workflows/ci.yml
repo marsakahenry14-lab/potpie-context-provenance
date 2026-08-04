@@ -1,0 +1,13 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: cd poc && python verify_vendor_hashes.py
+      - run: cd poc && python injection_chain_repro.py
