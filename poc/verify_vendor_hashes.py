@@ -21,7 +21,19 @@ MANIFEST = HERE / "VENDOR_HASHES.json"
 
 
 def sha256_of(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    """Hash normalized to LF line endings.
+
+    VENDOR_HASHES.json was computed from the raw git blob (LF, as stored on
+    GitHub). A local checkout on Windows with the common `core.autocrlf=true`
+    setting silently rewrites LF to CRLF, which would make every hash below
+    mismatch despite the content being identical -- normalize before hashing
+    so this check reflects content, not the checking-out platform's line
+    endings. (A `.gitattributes` pinning these files to `eol=lf` is also
+    committed so a *fresh* clone shouldn't hit this in the first place; this
+    normalization is defense in depth for whoever's git config predates that
+    or ignores it.)
+    """
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
 def main() -> int:
